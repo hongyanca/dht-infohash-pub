@@ -1,8 +1,8 @@
 {
   "name": "dht-infohash-pub",
   "version": "0.1.0",
-  "description": "dht-infohash-pub crawls the DHT Network and publishes infohashes found using ZMQ",
-  "main": "index.js",
+  "description": "dht-infohash-pub crawls the DHT Network and publishes infohashes found using ØMQ",
+  "main": "dht-infohash-pub.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,6 +19,7 @@
   "author": "Hong Yan",
   "license": "MIT",
   "dependencies": {
+    "commander": "^2.9.0",
     "dht-infohash-crawler": "^0.2.4",
     "zmq": "^2.15.3"
   }
