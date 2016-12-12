@@ -1,0 +1,25 @@
+{
+  "name": "dht-infohash-pub",
+  "version": "0.1.0",
+  "description": "dht-infohash-pub crawls the DHT Network and publishes infohashes found using ZMQ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "DHT",
+    "crawler",
+    "BT",
+    "BitTorrent",
+    "metadata",
+    "p2p",
+    "BEP-5",
+    "BEP-9"
+  ],
+  "author": "Hong Yan",
+  "license": "MIT",
+  "dependencies": {
+    "dht-infohash-crawler": "^0.2.4",
+    "zmq": "^2.15.3"
+  }
+}
