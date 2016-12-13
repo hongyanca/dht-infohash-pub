@@ -1,3 +1,15 @@
+#!/usr/bin/env node
+
+const currentNodeVersion = process.versions.node;
+if (currentNodeVersion.split('.')[0] < 6) {
+  console.error(
+    'You are running Node ' + currentNodeVersion + '.\n' +
+    'dht-infohash-pub requires Node 6 or higher. \n' +
+    'Please update your version of Node.'
+  );
+  process.exit(1);
+}
+
 const program = require('commander');
 const zmq = require('zmq');
 const createCrawler = require('dht-infohash-crawler');
@@ -21,7 +33,7 @@ function startCrawl(numOfCrawlers) {
 
     crawler.on('infohash', (infohash, peerId, peerAddress) => {
       if (!recentInfohashes.enqueue(infohash)) return;
-      console.log(infohash);
+      if (!program.quiet) console.log(infohash);
       publisher.send([infohash, ' ', addressObjToString(peerAddress)]);
     });
 
@@ -35,6 +47,7 @@ function createInfohashQueue(capacity) {
   class InfohashQueue {
     constructor(capacity = DEFAULT_QUEUE_SIZE) {
       this._infohashes = {};
+      // Create 16 arrays corresponding to the first character of the infohash string.
       ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
         .map(hexDigit => this._infohashes[hexDigit] = []);
       this._capacity = capacity;
@@ -53,7 +66,7 @@ function createInfohashQueue(capacity) {
 }
 
 function parseCmdLineOpts(program) {
-  const VERSION = '0.1.0';
+  const VERSION = '0.2.0';
   const NUM_CRAWLER = 2;
   const DHT_ADDR = '0.0.0.0';
   const BASE_PORT = 6881;
@@ -63,6 +76,7 @@ function parseCmdLineOpts(program) {
 
   program
     .version(VERSION)
+    .option('-q, --quiet', 'Do not log infohashes to the console')
     .option('-n, --number <n>', 'Number of crawler instance, default = 2', parseInt)
     .option('-a, --dhtaddr <da>', 'DHT network listening address, default = 0.0.0.0')
     .option('-p, --dhtport <dp>', 'DHT network listening port, default = 6881', parseInt)

@@ -10,7 +10,7 @@ This program wraps [dht-infohash-crawler](https://github.com/homeryan/dht-infoha
 - Find peers from the DHT network
 
 ## Requirement
-Install [ØMQ](http://zeromq.org/intro:get-the-software) for your platform. And install [ØMQ bindings](https://github.com/JustinTulloss/zeromq.node) for Node.js. 
+Install [ØMQ](http://zeromq.org/intro:get-the-software) for your platform. And install [ØMQ bindings](https://github.com/JustinTulloss/zeromq.node) for Node.js. If Node.js is upgraded or downgraded after `npm install zmq`, please run `npm rebuild` to rebuild ØMQ bindings.  
 ```
 npm install zmq
 ```
@@ -29,6 +29,7 @@ node dht-infohash-pub.js [options]
 
     -h, --help          output usage information
     -V, --version       output the version number
+    -q, --quiet         Do not log infohashes to the console
     -n, --number <n>    Number of crawler instance, default = 2
     -a, --dhtaddr <da>  DHT network listening address, default = 0.0.0.0
     -p, --dhtport <dp>  DHT network listening port, default = 6881

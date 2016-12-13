@@ -1,14 +1,23 @@
 {
   "name": "dht-infohash-pub",
-  "version": "0.1.1",
-  "description": "dht-infohash-pub crawls the DHT Network and publishes infohashes found using ØMQ",
+  "version": "0.2.1",
+  "description": "Crawls the DHT Network and publishes infohashes using ØMQ.",
   "main": "dht-infohash-pub.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "dht-infohash-pub": "./dht-infohash-pub.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/homeryan/dht-infohash-pub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/homeryan/dht-infohash-pub/issues"
+  },
+  "engines": {
+    "node": ">=6"
   },
   "keywords": [
     "DHT",
