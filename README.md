@@ -10,11 +10,13 @@ This program wraps [dht-infohash-crawler](https://github.com/homeryan/dht-infoha
 - Find peers from the DHT network
 
 ## Requirement
-Install [ØMQ](http://zeromq.org/intro:get-the-software) for your platform. And install [ØMQ bindings](https://github.com/JustinTulloss/zeromq.node) for Node.js. If Node.js is upgraded or downgraded after `npm install zmq`, please run `npm rebuild` to rebuild ØMQ bindings.  
+Install [ØMQ](http://zeromq.org/intro:get-the-software) for your platform. And then install [ØMQ bindings](https://github.com/JustinTulloss/zeromq.node) for Node.js.  
 ```
 npm install zmq
 ```
+If Node.js is upgraded or downgraded after `npm install zmq`, please run `npm rebuild` to rebuild ØMQ bindings.
 
+If you experience binding problems like `Error: Could not locate the bindings file.`, please change to dht-infohash-crawler's directory and run `npm rebuild` to rebuild ØMQ bindings. 
 ## Install
 
 ```
@@ -57,7 +59,7 @@ sub.on('message', function (...args) {
   console.log(`${args.reduce((prev, curr) => prev+curr)}`);
 });
 sub.connect('tcp://PUBLISHER_IP_ADDRESS:PUBLISHER_PORT');
-// Only subscribe to infohashes starting from '890abcdef'
+// Only subscribe to infohashes starting from '89abcdef'
 ['8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
   .map(letter => sub.subscribe(letter));
 ```
