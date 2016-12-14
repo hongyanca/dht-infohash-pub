@@ -1,6 +1,6 @@
 {
   "name": "dht-infohash-pub",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Crawls the DHT Network and publishes infohashes using ØMQ.",
   "main": "dht-infohash-pub.js",
   "scripts": {

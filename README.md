@@ -16,7 +16,7 @@ npm install zmq
 ```
 If Node.js is upgraded or downgraded after `npm install zmq`, please run `npm rebuild` to rebuild ØMQ bindings.
 
-If you experience binding problems like `Error: Could not locate the bindings file.`, please change to dht-infohash-crawler's directory and run `npm rebuild` to rebuild ØMQ bindings. 
+If you experience binding problems like `Error: Could not locate the bindings file.`, please change to dht-infohash-pub's directory and run `npm rebuild` to rebuild ØMQ bindings. 
 ## Install
 
 ```
