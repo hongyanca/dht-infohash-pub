@@ -13,7 +13,7 @@ if (currentNodeVersion.split('.')[0] < 6) {
 const program = require('commander');
 const zmq = require('zmq');
 const createCrawler = require('dht-infohash-crawler');
-const DEFAULT_QUEUE_SIZE = 1024;
+const DEFAULT_QUEUE_SIZE = 32768;
 
 parseCmdLineOpts(program);
 const publisher = zmq.socket('pub');
@@ -43,20 +43,23 @@ function startCrawl(numOfCrawlers) {
 
 const addressObjToString = address => `${address.address}:${address.port+''}`;
 
+function uint8ToPaddedHexString(number) { return ('0' + number.toString(16)).slice(-2); }
+
 function createInfohashQueue(capacity) {
   class InfohashQueue {
     constructor(capacity = DEFAULT_QUEUE_SIZE) {
+      // _infohashes is an object of 256 Arrays using '00', '01', '02' ... 'ff' as keys.
       this._infohashes = {};
-      // Create 16 arrays corresponding to the first character of the infohash string.
-      ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f']
-        .map(hexDigit => this._infohashes[hexDigit] = []);
-      this._capacity = capacity;
+      // Create 256 arrays corresponding to the first 2 character of the infohash string.
+      Array.apply(null, {length: 256}).map(Number.call, Number)
+        .map(hex => this._infohashes[uint8ToPaddedHexString(hex)] = []);
+      this._siloCapacity = Math.floor((capacity + 255)/ 256);
     }
 
     enqueue (infohashString) {
-      const queue = this._infohashes[infohashString[0]];
+      const queue = this._infohashes[infohashString[0] + infohashString[1]];
       if (queue.includes(infohashString)) return false;
-      if (queue.length >= this._capacity) queue.shift();
+      if (queue.length >= this._siloCapacity) queue.shift();
       queue.push(infohashString);
       return true;
     }
@@ -66,7 +69,7 @@ function createInfohashQueue(capacity) {
 }
 
 function parseCmdLineOpts(program) {
-  const VERSION = '0.2.0';
+  const VERSION = '0.2.4';
   const NUM_CRAWLER = 2;
   const DHT_ADDR = '0.0.0.0';
   const BASE_PORT = 6881;

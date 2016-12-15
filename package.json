@@ -1,6 +1,6 @@
 {
   "name": "dht-infohash-pub",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Crawls the DHT Network and publishes infohashes using ØMQ.",
   "main": "dht-infohash-pub.js",
   "scripts": {
@@ -33,7 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "commander": "^2.9.0",
-    "dht-infohash-crawler": "^0.2.4",
+    "dht-infohash-crawler": "^0.3.1",
     "zmq": "^2.15.3"
   }
 }

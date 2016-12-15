@@ -16,9 +16,9 @@ commander@^2.9.0:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-dht-infohash-crawler@^0.2.4:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/dht-infohash-crawler/-/dht-infohash-crawler-0.2.5.tgz#fe9fc153ebb9c1d75a11d01aa12130f3e7d0c180"
+dht-infohash-crawler@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/dht-infohash-crawler/-/dht-infohash-crawler-0.3.1.tgz#f6c06b2d27aa4f07fc789c60635f1a874ec7058d"
   dependencies:
     bencode "^0.10.0"
 
